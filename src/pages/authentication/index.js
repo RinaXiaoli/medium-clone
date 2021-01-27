@@ -1,13 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import useFetch from 'hooks/useFetch';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [{response, isLoading, error}, doFetch] = useFetch('/users/login');
+
+  console.log('fff', response, isLoading, error);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('email — ', email, password);
+    doFetch({
+      method: 'POST',
+      data: {
+        user: {
+          email: 'ggg@fllf.tu',
+          password: 'jgkfldgj',
+        },
+      },
+    });
   };
+
   return (
     <div className="auth-page">
       <div className="container page">
@@ -40,6 +56,7 @@ const Auth = () => {
                 <button
                   className="btn btn-lg btn-primary pull-xs-right"
                   type="submit"
+                  disabled={isLoading}
                 >
                   Sign in
                 </button>
