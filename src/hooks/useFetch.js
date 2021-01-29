@@ -17,7 +17,7 @@ export default (url) => {
   useEffect(() => {
     if (!isLoading) return;
 
-    axios(`${baseUrl}/users/login`, options)
+    axios(`${baseUrl}${url}`, options)
       .then((res) => {
         console.log('success — ', res);
         setResponse(res.data);
